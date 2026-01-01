@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team RZR Hub | Developer Legacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --accent: #ff007a;
+            --bg: #050508;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Outfit', sans-serif; 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #10101a 0%, #050508 100%);
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Syncopate';
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            color: #ccc; text-decoration: none; font-weight: 600; 
+            transition: 0.3s; cursor: pointer; font-size: 0.8rem;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .avatar-main {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* CORRECTION COULEUR PSEUDO */
+        .hero h1 {
+            font-family: 'Syncopate';
+            font-size: 4rem;
+            margin-bottom: 10px;
+            color: #FFFFFF; /* Blanc Pur */
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.6), 0 0 40px rgba(0, 0, 0, 1);
+            letter-spacing: 5px;
+        }
+
+        .hero p { font-size: 1.5rem; color: #aaa; font-weight: 300; margin-top: 10px; }
+
+        /* CONTENT SECTIONS */
+        .container { max-width: 1000px; margin: 0 auto; padding: 100px 20px; }
+
+        .section-title {
+            font-family: 'Syncopate';
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary);
+            padding-left: 20px;
+            color: #fff;
+        }
+
+        .about-box {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 30px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        /* GRID CARDS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .card h3 { font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom: 10px; color: #fff; }
+
+        /* CONTACT/SOCIALS */
+        .social-bar {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(88, 101, 242, 0.1);
+            padding: 12px 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid rgba(88, 101, 242, 0.4);
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .social-link:hover { background: rgba(88, 101, 242, 0.2); border-color: #5865F2; transform: scale(1.05); }
+        .social-link img { width: 24px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">
+        <img src="https://media.discordapp.net/attachments/1398593210967654502/1456025891351167113/noFilter.png?ex=6956dd48&is=69558bc8&hm=401d75614443ce00b75aba774b72cf93ee1652e4c495e67566d3bf3ac1f0758b&=&format=webp&quality=lossless" alt="Logo">
+        TEAM RZR HUB
+    </div>
+    <div class="nav-links">
+        <a onclick="scrollToSection('hero')">HOME</a>
+        <a onclick="scrollToSection('legacy')">MY LEGACY</a>
+        <a onclick="scrollToSection('scripts')">SCRIPTS</a>
+        <a onclick="scrollToSection('opinion')">SINCERITY</a>
+    </div>
+</nav>
+
+<section id="hero" class="hero">
+    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-A392564183366FF4A4F238E9442A23B8-Png/150/150/AvatarHeadshot/Webp/noFilter" class="avatar-main" alt="Avatar">
+    <h1>FGH567</h1>
+    <p>Roblox Developer & Scripter since 2010</p>
+    
+    <div class="social-bar">
+        <div class="social-link">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.lel-bF6qMm5WtTbYWiTD0gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Discord">
+            valcren_23
+        </div>
+    </div>
+</section>
+
+<div id="legacy" class="container">
+    <h2 class="section-title">MY ROBLOX JOURNEY</h2>
+    <div class="about-box">
+        <p>
+            I am a Roblox Developer who has been creating scripts since 2010. For 15 years, my passion has been building tools for the community so everyone can enjoy these advantages. Despite the effort I put into my work, people try to crack my scripts and spam my Discord server. What have I done wrong? My goal is simply to help you enjoy the game, not to be targeted. I don't understand why this happens...
+        </p>
+    </div>
+</div>
+
+<div id="scripts" class="container">
+    <h2 class="section-title">ACTIVE SCRIPTS</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984619521441802/132620530679256-1767154417548.png?ex=6956b6d8&is=69556558&hm=bd005115560bf2811db9e27eaead72546ac93f5004de93749416fbd51773b101&=&format=webp&quality=lossless" alt="Pushing">
+            <h3>Pushing Together</h3>
+            <p style="color: #888; margin: 10px 0;">Optimized for high performance.</p>
+        </div>
+        <div class="card">
+            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984619215130777/4924922222-1766202387334.png?ex=6956b6d8&is=69556558&hm=d5c6e4849b14694c796ee2a0f6a8998810bff9283ec53efacfdca5129cf2bdb4&=&format=webp&quality=lossless" alt="Brookhaven">
+            <h3>Brookhaven RP</h3>
+            <p style="color: #888; margin: 10px 0;">Premium features for RP fans.</p>
+        </div>
+        <div class="card" style="border-color: #ffcc00;">
+            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984618884042762/9606797934-1766202243138.png?ex=6956b6d8&is=69556558&hm=417582afc560d58d0ba26abf67113f8beb50ed0c571abd41d56fc9861323c768&=&format=webp&quality=lossless" alt="Train">
+            <h3 style="color: #ffcc00;">Train VS Cars</h3>
+            <p style="color: #888; margin: 10px 0;">Premium Whitelist Only.</p>
+        </div>
+    </div>
+</div>
+
+<div id="opinion" class="container" style="padding-bottom: 200px;">
+    <h2 class="section-title">SINCERITY & THOUGHTS</h2>
+    <div class="about-box" style="border-color: var(--accent);">
+        <p>
+            I spend hours coding scripts for you so you can have fun and enjoy. Despite my efforts, I have noticed that some people try to crack my scripts and spam my Discord server. If you crack them for a reason, is it because the key system bothers you? Tell me and I'll remove it! What is the utility of cracking my work? If you want to help me truly secure my scripts, let me know. I want an honest person, not malice. I am a simple developer starting out and I don't harm anyone, so please stop these cracking attempts. I spend my whole day for you, so please, truly stop. 🥹😢 Cordially, Team RZR Hub and Happy New Year to you!
+        </p>
+    </div>
+</div>
+
+<script>
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
