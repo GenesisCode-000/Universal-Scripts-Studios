@@ -12,7 +12,7 @@
             --bg: #050508;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
-            --card-bg: rgba(10, 10, 15, 0.85);
+            --card-bg: rgba(10, 10, 15, 0.9);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,10 +54,11 @@
         .nav-links a { 
             color: #fff; text-decoration: none; font-weight: 600; 
             transition: 0.3s; cursor: pointer; font-size: 0.75rem;
+            letter-spacing: 1px;
         }
         .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* HERO */
+        /* HERO SECTION */
         .hero {
             height: 100vh;
             display: flex;
@@ -87,34 +88,25 @@
             letter-spacing: 8px;
         }
 
-        .hero p { font-size: 1.2rem; color: #888; font-weight: 300; margin-top: 10px; }
+        .hero p { font-size: 1.2rem; color: #888; font-weight: 300; margin-top: 10px; letter-spacing: 2px; }
 
-        /* CONTAINER & SECTIONS */
-        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        /* SCRIPTS GRID */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
 
         .section-title {
             font-family: 'Syncopate';
             font-size: 1.5rem;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             border-left: 4px solid var(--primary);
             padding-left: 20px;
             color: #fff;
+            letter-spacing: 2px;
         }
 
-        .about-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 35px;
-            border-radius: 20px;
-            line-height: 1.8;
-            color: #bbb;
-        }
-
-        /* GRID SCRIPTS */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 25px; 
+            gap: 30px; 
         }
         
         .card {
@@ -125,22 +117,26 @@
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .card:hover { 
             border-color: var(--primary); 
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.15);
         }
 
         .card img { 
-            width: 100%; height: 160px; 
+            width: 100%; height: 180px; 
             object-fit: cover; border-radius: 12px; 
-            margin-bottom: 15px;
-            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.5s;
         }
 
-        .card h3 { font-family: 'Syncopate'; font-size: 0.8rem; margin-bottom: 15px; color: var(--primary); height: 40px; }
+        .card:hover img { transform: scale(1.05); }
+
+        .card h3 { font-family: 'Syncopate'; font-size: 0.8rem; margin-bottom: 20px; color: var(--primary); height: 40px; display: flex; align-items: center; }
 
         .btn-copy {
             background: transparent;
@@ -156,17 +152,30 @@
             margin-top: auto;
         }
 
-        .btn-copy:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
+        .btn-copy:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
+
+        /* CONTENT BOXES */
+        .about-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 25px;
+            line-height: 1.8;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
 
         .social-link {
             display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(255,255,255,0.03);
-            padding: 10px 25px;
-            border-radius: 12px;
+            background: rgba(88, 101, 242, 0.1);
+            padding: 12px 25px;
+            border-radius: 15px;
             text-decoration: none; color: #fff;
-            border: 1px solid var(--border);
-            margin-top: 20px;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            margin-top: 25px;
+            transition: 0.3s;
         }
+        .social-link:hover { background: rgba(88, 101, 242, 0.2); transform: scale(1.05); }
 
         @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
@@ -181,7 +190,7 @@
     <div class="nav-links">
         <a href="#hero">HOME</a>
         <a href="#scripts">SCRIPTS</a>
-        <a href="#legacy">JOURNEY</a>
+        <a href="#legacy">MY JOURNEY</a>
         <a href="#opinion">SINCERITY</a>
     </div>
 </nav>
@@ -191,47 +200,47 @@
     <h1>FGH567</h1>
     <p>ROBLOX DEVELOPER SINCE 2010</p>
     <div class="social-link">
-        <img src="https://tse2.mm.bing.net/th/id/OIP.lel-bF6qMm5WtTbYWiTD0gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" width="20" alt="Discord">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" width="20" alt="Discord">
         valcren_23
     </div>
 </section>
 
 <div id="scripts" class="container">
-    <h2 class="section-title">MY ACTIVE SCRIPTS</h2>
+    <h2 class="section-title">ACTIVE SCRIPTS</h2>
     <div class="grid">
         
         <div class="card" style="border-color: #ffcc00;">
-            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984618884042762/9606797934-1766202243138.png?format=webp" alt="Highway">
-            <h3>Highway Showdown [NEW]</h3>
+            <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" alt="Highway">
+            <h3>Highway Showdown [🌵NEW MAP]</h3>
             <button class="btn-copy" onclick="copyScript('highway')">COPY SCRIPT</button>
         </div>
 
         <div class="card">
-            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984619521441802/132620530679256-1767154417548.png?format=webp" alt="TruckRNG">
+            <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" alt="TruckRNG">
             <h3>Truck RNG</h3>
             <button class="btn-copy" onclick="copyScript('truck')">COPY SCRIPT</button>
         </div>
 
         <div class="card">
-            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984619521441802/132620530679256-1767154417548.png?format=webp" alt="Pushing">
+            <img src="https://tr.rbxcdn.com/180DAY-dca01ce2f08e9b0c2be10d8af2f43558/768/432/Image/Webp/noFilter" alt="Pushing">
             <h3>Pushing Together</h3>
             <button class="btn-copy" onclick="copyScript('pushing')">COPY SCRIPT</button>
         </div>
 
         <div class="card">
-            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984618884042762/9606797934-1766202243138.png?format=webp" alt="Train">
+            <img src="https://scriptblox.com/images/script/9606797934-1766202243138.png" alt="Train">
             <h3>Train VS Cars Remastered</h3>
             <button class="btn-copy" onclick="copyScript('train')">COPY SCRIPT</button>
         </div>
 
         <div class="card">
-            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984619215130777/4924922222-1766202387334.png?format=webp" alt="CarSim">
+            <img src="https://tr.rbxcdn.com/180DAY-93c531ce66cdf79d41c55ce98a16c34c/768/432/Image/Webp/noFilter" alt="CarSim">
             <h3>Car Simulator Update</h3>
             <button class="btn-copy" onclick="copyScript('carsim')">COPY SCRIPT</button>
         </div>
 
         <div class="card">
-            <img src="https://media.discordapp.net/attachments/1398593210967654502/1455984619215130777/4924922222-1766202387334.png?format=webp" alt="Slide">
+            <img src="https://tr.rbxcdn.com/180DAY-0937b2b0c4ec68e44c9c6d003c3dde7b/768/432/Image/Webp/noFilter" alt="Slide">
             <h3>Slide 999,999 Miles Obby</h3>
             <button class="btn-copy" onclick="copyScript('slide')">COPY SCRIPT</button>
         </div>
@@ -240,16 +249,16 @@
 </div>
 
 <div id="legacy" class="container">
-    <h2 class="section-title">MY JOURNEY</h2>
+    <h2 class="section-title">MY ROBLOX JOURNEY</h2>
     <div class="about-box">
-        <p>I am a Roblox Developer creating scripts since 2010. For 15 years, my passion has been building tools for the community. Despite my effort, people try to crack my scripts... I don't understand why. My goal is simply to help you enjoy the game.</p>
+        <p>I am a Roblox Developer who has been creating scripts since 2010. For 15 years, my passion has been building tools for the community so everyone can enjoy these advantages. Despite the effort I put into my work, people try to crack my scripts and spam my Discord server. My goal is simply to help you enjoy the game, not to be targeted. I do this for the community.</p>
     </div>
 </div>
 
 <div id="opinion" class="container" style="padding-bottom: 150px;">
-    <h2 class="section-title">SINCERITY</h2>
+    <h2 class="section-title">SINCERITY & THOUGHTS</h2>
     <div class="about-box" style="border-color: var(--accent);">
-        <p>I spend hours coding for you. If you crack my work, you steal my time. If you want to help me secure my scripts or give feedback, let me know. Happy New Year to you! 🥹</p>
+        <p>I spend hours coding scripts for you so you can have fun and enjoy. If you crack my work, you are stealing my time and my passion. If you want to help me truly secure my scripts or give feedback, my DMs are always open. I don't harm anyone, so please stop these cracking attempts. Happy New Year to you all! 🥹</p>
     </div>
 </div>
 
@@ -275,6 +284,8 @@
                 btn.style.borderColor = "#00f2ff";
                 btn.style.color = "#00f2ff";
             }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
         });
     }
 </script>
