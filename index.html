@@ -1,264 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team RZR Hub | Developer Legacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Team RZR Hub | Private Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00f2ff;
+            --secondary: #7000ff;
             --accent: #ff007a;
-            --bg: #050508;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --card-bg: rgba(10, 10, 15, 0.9);
+            --bg: #08080c;
+            --card: rgba(15, 15, 25, 0.7);
+            --border: rgba(0, 242, 255, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
         body { 
             background: var(--bg); 
-            color: #fff; 
-            font-family: 'Outfit', sans-serif; 
+            color: #e0e0e0; 
+            font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #10101a 0%, #050508 100%);
+            background-image: 
+                linear-gradient(to bottom, rgba(8, 8, 12, 0.8), rgba(8, 8, 12, 0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
 
-        /* NAVIGATION */
+        /* --- BACKGROUND ANIMATION --- */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.1) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
+        }
+
+        /* --- NAVIGATION --- */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 15px 50px;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
+            position: fixed; top: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 8, 0.9); backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border); z-index: 1000;
         }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-family: 'Syncopate';
-            font-size: 0.9rem;
-            color: var(--primary);
-        }
-
-        .nav-logo img { width: 35px; height: 35px; border-radius: 50%; border: 1px solid var(--primary); }
-
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { 
-            color: #fff; text-decoration: none; font-weight: 600; 
-            transition: 0.3s; cursor: pointer; font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
+        .nav-logo { font-family: 'Orbitron'; color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; gap: 15px; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 0 15px var(--primary); }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 700; transition: 0.3s; font-size: 0.9rem; }
         .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* HERO SECTION */
+        /* --- HERO --- */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background: url('https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter') center/cover;
+            position: relative;
         }
+        .hero::before { content: ""; position: absolute; inset: 0; background: rgba(8, 8, 12, 0.85); }
+        .hero-content { position: relative; z-index: 1; }
+        .avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--primary); margin-bottom: 20px; filter: drop-shadow(0 0 20px var(--primary)); }
+        .hero h1 { font-family: 'Orbitron'; font-size: 4rem; letter-spacing: 10px; margin: 10px 0; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .avatar-main {
-            width: 140px; height: 140px;
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-            margin-bottom: 25px;
-            animation: float 4s ease-in-out infinite;
-        }
+        /* --- GRID --- */
+        .section-title { font-family: 'Orbitron'; text-align: center; margin: 80px 0 40px; font-size: 2rem; color: var(--primary); text-transform: uppercase; letter-spacing: 5px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-        .hero h1 {
-            font-family: 'Syncopate';
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            color: #fff;
-            text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
-            letter-spacing: 8px;
-        }
-
-        .hero p { font-size: 1.2rem; color: #888; font-weight: 300; margin-top: 10px; letter-spacing: 2px; }
-
-        /* SCRIPTS GRID */
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
-
-        .section-title {
-            font-family: 'Syncopate';
-            font-size: 1.5rem;
-            margin-bottom: 50px;
-            border-left: 4px solid var(--primary);
-            padding-left: 20px;
-            color: #fff;
-            letter-spacing: 2px;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 30px; 
-        }
-        
+        /* --- CARDS --- */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            background: var(--card); border: 1px solid var(--border); border-radius: 15px; overflow: hidden;
+            transition: 0.5s; position: relative; display: flex; flex-direction: column;
         }
+        .card:hover { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-body h3 { font-family: 'Orbitron'; font-size: 0.9rem; margin-bottom: 15px; color: #fff; }
 
-        .card:hover { 
-            border-color: var(--primary); 
-            transform: translateY(-10px);
-            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.15);
+        .btn {
+            padding: 12px; border-radius: 5px; font-family: 'Orbitron'; font-size: 0.7rem; 
+            cursor: pointer; transition: 0.3s; text-align: center; text-decoration: none;
+            text-transform: uppercase; font-weight: bold; border: 1px solid var(--primary);
         }
+        .btn-copy { background: transparent; color: var(--primary); }
+        .btn-copy:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
+        
+        .btn-contact { background: var(--secondary); border-color: var(--secondary); color: #fff; }
+        .btn-contact:hover { background: #fff; color: var(--secondary); box-shadow: 0 0 15px var(--secondary); }
 
-        .card img { 
-            width: 100%; height: 180px; 
-            object-fit: cover; border-radius: 12px; 
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.5s;
+        /* --- ABOUT --- */
+        .about-section { background: rgba(255,255,255,0.02); padding: 60px; border-radius: 20px; border: 1px solid var(--border); margin-top: 100px; }
+        .about-section p { font-size: 1.2rem; line-height: 1.6; color: #aaa; }
+
+        /* --- MODAL --- */
+        #contactModal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            z-index: 2000; justify-content: center; align-items: center;
         }
-
-        .card:hover img { transform: scale(1.05); }
-
-        .card h3 { font-family: 'Syncopate'; font-size: 0.8rem; margin-bottom: 20px; color: var(--primary); height: 40px; display: flex; align-items: center; }
-
-        .btn-copy {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 12px;
-            border-radius: 10px;
-            font-family: 'Syncopate';
-            font-size: 0.65rem;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            margin-top: auto;
+        .modal-content {
+            background: var(--bg); border: 2px solid var(--primary); padding: 40px;
+            border-radius: 20px; text-align: center; max-width: 400px; width: 90%;
         }
+        .modal-content h2 { font-family: 'Orbitron'; color: var(--primary); margin-bottom: 20px; }
+        .modal-content p { margin-bottom: 25px; color: #ccc; }
+        .close-btn { color: #ff007a; cursor: pointer; font-weight: bold; margin-top: 20px; display: block; }
 
-        .btn-copy:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
-
-        /* CONTENT BOXES */
-        .about-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 40px;
-            border-radius: 25px;
-            line-height: 1.8;
-            color: #ccc;
-            font-size: 1.1rem;
-        }
-
-        .social-link {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(88, 101, 242, 0.1);
-            padding: 12px 25px;
-            border-radius: 15px;
-            text-decoration: none; color: #fff;
-            border: 1px solid rgba(88, 101, 242, 0.3);
-            margin-top: 25px;
-            transition: 0.3s;
-        }
-        .social-link:hover { background: rgba(88, 101, 242, 0.2); transform: scale(1.05); }
-
-        @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
 </head>
 <body>
 
+<div class="bg-glow"></div>
+
 <nav>
     <div class="nav-logo">
         <img src="https://media.discordapp.net/attachments/1398593210967654502/1456025891351167113/noFilter.png?format=webp&quality=lossless" alt="Logo">
-        TEAM RZR HUB
+        TEAM RZR
     </div>
     <div class="nav-links">
-        <a href="#hero">HOME</a>
         <a href="#scripts">SCRIPTS</a>
-        <a href="#legacy">MY JOURNEY</a>
-        <a href="#opinion">SINCERITY</a>
+        <a href="#legacy">LEGACY</a>
+        <a href="#opinion">CONTACT</a>
     </div>
 </nav>
 
-<section id="hero" class="hero">
-    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-A392564183366FF4A4F238E9442A23B8-Png/150/150/AvatarHeadshot/Webp/noFilter" class="avatar-main" alt="Avatar">
-    <h1>FGH567</h1>
-    <p>ROBLOX DEVELOPER SINCE 2010</p>
-    <div class="social-link">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" width="20" alt="Discord">
-        valcren_23
+<section class="hero">
+    <div class="hero-content">
+        <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-A392564183366FF4A4F238E9442A23B8-Png/150/150/AvatarHeadshot/Webp/noFilter" class="avatar" alt="Dev">
+        <p style="letter-spacing: 5px; color: var(--primary);">ESTABLISHED 2010</p>
+        <h1>FGH567</h1>
+        <p style="max-width: 600px; margin-top: 20px;">Expert en ingénierie Lua et création d'outils communautaires. Découvrez mes projets les plus récents.</p>
     </div>
 </section>
 
 <div id="scripts" class="container">
-    <h2 class="section-title">ACTIVE SCRIPTS</h2>
+    <h2 class="section-title">Database : Scripts</h2>
     <div class="grid">
         
-        <div class="card" style="border-color: #ffcc00;">
-            <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" alt="Highway">
-            <h3>Highway Showdown [🌵NEW MAP]</h3>
-            <button class="btn-copy" onclick="copyScript('highway')">COPY SCRIPT</button>
+        <div class="card" style="border: 2px solid var(--secondary);">
+            <div style="background: var(--secondary); color: white; text-align: center; font-size: 0.7rem; padding: 5px; font-weight: bold;">[NEW] +1 Speed Hover board Escape !</div>
+            <img src="https://tr.rbxcdn.com/180DAY-93c531ce66cdf79d41c55ce98a16c34c/768/432/Image/Webp/noFilter" class="card-img" alt="Hoverboard">
+            <div class="card-body">
+                <h3>+1 Speed Hover board Escape !</h3>
+                <p style="font-size: 0.8rem; color: #888; margin-bottom: 20px;">Auto-Win, Auto-Farm & Bypass Anti-Cheat.</p>
+                <button class="btn btn-contact" onclick="openContact()">GET SCRIPT (CONTACT ME)</button>
+            </div>
         </div>
 
         <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" alt="TruckRNG">
-            <h3>Truck RNG</h3>
-            <button class="btn-copy" onclick="copyScript('truck')">COPY SCRIPT</button>
+            <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" class="card-img" alt="Highway">
+            <div class="card-body">
+                <h3>Highway Showdown [🌵NEW MAP]</h3>
+                <button class="btn btn-copy" onclick="copyScript('highway')">COPY SCRIPT</button>
+            </div>
         </div>
 
         <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-dca01ce2f08e9b0c2be10d8af2f43558/768/432/Image/Webp/noFilter" alt="Pushing">
-            <h3>Pushing Together</h3>
-            <button class="btn-copy" onclick="copyScript('pushing')">COPY SCRIPT</button>
+            <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" class="card-img" alt="TruckRNG">
+            <div class="card-body">
+                <h3>Truck RNG</h3>
+                <button class="btn btn-copy" onclick="copyScript('truck')">COPY SCRIPT</button>
+            </div>
         </div>
 
         <div class="card">
-            <img src="https://scriptblox.com/images/script/9606797934-1766202243138.png" alt="Train">
-            <h3>Train VS Cars Remastered</h3>
-            <button class="btn-copy" onclick="copyScript('train')">COPY SCRIPT</button>
+            <img src="https://tr.rbxcdn.com/180DAY-dca01ce2f08e9b0c2be10d8af2f43558/768/432/Image/Webp/noFilter" class="card-img" alt="Pushing">
+            <div class="card-body">
+                <h3>Pushing Together</h3>
+                <button class="btn btn-copy" onclick="copyScript('pushing')">COPY SCRIPT</button>
+            </div>
         </div>
 
         <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-93c531ce66cdf79d41c55ce98a16c34c/768/432/Image/Webp/noFilter" alt="CarSim">
-            <h3>Car Simulator Update</h3>
-            <button class="btn-copy" onclick="copyScript('carsim')">COPY SCRIPT</button>
+            <img src="https://scriptblox.com/images/script/9606797934-1766202243138.png" class="card-img" alt="Train">
+            <div class="card-body">
+                <h3>Train VS Cars Remastered</h3>
+                <button class="btn btn-copy" onclick="copyScript('train')">COPY SCRIPT</button>
+            </div>
         </div>
 
         <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-0937b2b0c4ec68e44c9c6d003c3dde7b/768/432/Image/Webp/noFilter" alt="Slide">
-            <h3>Slide 999,999 Miles Obby</h3>
-            <button class="btn-copy" onclick="copyScript('slide')">COPY SCRIPT</button>
+            <img src="https://tr.rbxcdn.com/180DAY-0937b2b0c4ec68e44c9c6d003c3dde7b/768/432/Image/Webp/noFilter" class="card-img" alt="Slide">
+            <div class="card-body">
+                <h3>Slide 999,999 Miles Obby</h3>
+                <button class="btn btn-copy" onclick="copyScript('slide')">COPY SCRIPT</button>
+            </div>
         </div>
 
     </div>
 </div>
 
 <div id="legacy" class="container">
-    <h2 class="section-title">MY ROBLOX JOURNEY</h2>
-    <div class="about-box">
+    <div class="about-section">
+        <h2 class="section-title" style="text-align: left; margin: 0 0 20px 0;">15 Years of Legacy</h2>
         <p>I am a Roblox Developer who has been creating scripts since 2010. For 15 years, my passion has been building tools for the community so everyone can enjoy these advantages. Despite the effort I put into my work, people try to crack my scripts and spam my Discord server. My goal is simply to help you enjoy the game, not to be targeted. I do this for the community.</p>
     </div>
 </div>
 
-<div id="opinion" class="container" style="padding-bottom: 150px;">
-    <h2 class="section-title">SINCERITY & THOUGHTS</h2>
-    <div class="about-box" style="border-color: var(--accent);">
+<div id="opinion" class="container" style="padding-bottom: 100px;">
+    <div class="about-section" style="border-color: var(--accent);">
+        <h2 class="section-title" style="text-align: left; margin: 0 0 20px 0; color: var(--accent);">Sincerity</h2>
         <p>I spend hours coding scripts for you so you can have fun and enjoy. If you crack my work, you are stealing my time and my passion. If you want to help me truly secure my scripts or give feedback, my DMs are always open. I don't harm anyone, so please stop these cracking attempts. Happy New Year to you all! 🥹</p>
+    </div>
+</div>
+
+<div id="contactModal">
+    <div class="modal-content">
+        <h2>🔒 PRIVATE SCRIPT</h2>
+        <p>To get the access key or the script for <b>+1 Speed Hover board Escape</b>, please contact me on Discord :</p>
+        <div style="background: rgba(112, 0, 255, 0.2); padding: 15px; border-radius: 10px; font-weight: bold; color: #fff;">
+            valcren_23
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 15px;">Ask for "Hoverboard Script Access"</p>
+        <span class="close-btn" onclick="closeContact()">CLOSE</span>
     </div>
 </div>
 
@@ -276,7 +223,7 @@
         navigator.clipboard.writeText(scripts[id]).then(() => {
             const btn = event.target;
             const originalText = btn.innerText;
-            btn.innerText = "COPIED! ✅";
+            btn.innerText = "ACCESS GRANTED ✅";
             btn.style.borderColor = "#00ff88";
             btn.style.color = "#00ff88";
             setTimeout(() => {
@@ -284,9 +231,21 @@
                 btn.style.borderColor = "#00f2ff";
                 btn.style.color = "#00f2ff";
             }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
         });
+    }
+
+    function openContact() {
+        document.getElementById('contactModal').style.display = 'flex';
+    }
+
+    function closeContact() {
+        document.getElementById('contactModal').style.display = 'none';
+    }
+
+    // Fermer si on clique à l'extérieur
+    window.onclick = function(event) {
+        let modal = document.getElementById('contactModal');
+        if (event.target == modal) { modal.style.display = 'none'; }
     }
 </script>
 
