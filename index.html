@@ -3,185 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEAM RZR | PRIVATE VAULT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>RZR SYSTEM | Encrypted Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff004c; /* Rouge néon pour le côté "Alerte/Privé" */
-            --bg: #050505;
-            --card-bg: #0c0c0c;
-            --text: #ffffff;
-            --border: #1a1a1a;
+            --bg: #0a0a0c;
+            --surface: #121216;
+            --primary: #00f2ff;
+            --danger: #ff3e3e;
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #e1e1e6;
+            --text-dim: #88888f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
+            background: var(--bg); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
         }
 
-        /* --- BACKGROUND --- */
-        .grid-bg {
-            position: fixed; inset: 0;
-            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1; opacity: 0.3;
-        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- NAV --- */
+        /* --- HEADER --- */
         nav {
-            padding: 30px 50px;
-            display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-family: 'Syncopate'; font-size: 1.2rem; color: var(--primary); letter-spacing: 5px; }
-        .discord-tag { background: var(--primary); color: #000; padding: 5px 15px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
+
+        .status-dot {
+            width: 8px; height: 8px; background: #00ff88;
+            border-radius: 50%; display: inline-block;
+            margin-right: 8px; box-shadow: 0 0 10px #00ff88;
+        }
 
         /* --- HERO --- */
-        header {
-            padding: 100px 20px; text-align: center;
-            border-bottom: 1px solid var(--border);
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+            max-width: 900px; margin: 0 auto;
         }
-        header h1 { font-family: 'Syncopate'; font-size: clamp(2rem, 10vw, 5rem); margin-bottom: 20px; }
-        header p { color: #666; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 700; letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff, #666);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .whitelist-badge {
+            display: inline-block; padding: 6px 12px;
+            border: 1px solid var(--danger); color: var(--danger);
+            font-size: 0.7rem; font-weight: bold; text-transform: uppercase;
+            border-radius: 4px; margin-bottom: 20px;
+        }
 
         /* --- GRID --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 25px; }
 
-        /* --- CARD --- */
+        /* --- CARD STYLE --- */
         .card {
-            background: var(--card-bg); border: 1px solid var(--border);
-            padding: 20px; border-radius: 0px; transition: 0.3s;
-            position: relative; overflow: hidden;
-        }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .card img { 
-            width: 100%; height: 200px; object-fit: cover; 
-            filter: grayscale(100%); transition: 0.5s;
+            background: var(--surface);
             border: 1px solid var(--border);
-        }
-        .card:hover img { filter: grayscale(0%); }
-        .card h3 { font-family: 'Syncopate'; font-size: 0.8rem; margin: 20px 0; color: #fff; }
-        
-        .btn-request {
-            width: 100%; padding: 15px; background: transparent;
-            border: 1px solid var(--primary); color: var(--primary);
-            font-family: 'Syncopate'; font-size: 0.7rem; cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-request:hover { background: var(--primary); color: #000; }
-
-        /* --- ABOUT --- */
-        .legacy-box {
-            margin-top: 50px; padding: 40px; border: 1px solid var(--border);
-            background: #080808;
-        }
-        .legacy-box h2 { font-family: 'Syncopate'; margin-bottom: 20px; color: var(--primary); }
-        .legacy-box p { line-height: 1.8; color: #888; }
-
-        /* --- MODAL --- */
-        .modal {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-            z-index: 1000; align-items: center; justify-content: center;
-        }
-        .modal-content {
-            background: #111; border: 1px solid var(--primary);
-            padding: 50px; text-align: center; max-width: 500px; width: 90%;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
             position: relative;
         }
-        .modal-content h2 { font-family: 'Syncopate'; color: var(--primary); margin-bottom: 20px; }
-        .modal-content .tag { font-size: 2rem; font-weight: bold; margin: 20px 0; display: block; color: #fff; }
-        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; color: #444; }
+
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        .card-image {
+            width: 100%; height: 210px; object-fit: cover;
+            opacity: 0.7; transition: 0.3s;
+        }
+        .card:hover .card-image { opacity: 1; }
+
+        .card-content { padding: 25px; }
+        .card-tag { font-size: 0.65rem; color: var(--primary); font-weight: bold; margin-bottom: 10px; display: block; }
+        .card-title { font-size: 1.1rem; margin-bottom: 15px; font-weight: 600; }
+
+        .btn-lock {
+            width: 100%; padding: 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            color: #fff; border-radius: 8px;
+            cursor: pointer; font-family: 'JetBrains Mono';
+            font-size: 0.8rem; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        .btn-lock:hover { background: var(--primary); color: #000; border-color: var(--primary); font-weight: bold; }
+
+        /* --- PROTECTION NOTICE --- */
+        .protection-info {
+            background: rgba(255, 62, 62, 0.03);
+            border: 1px solid rgba(255, 62, 62, 0.2);
+            padding: 40px; border-radius: 16px; margin-top: 80px;
+        }
+
+        .protection-info h2 { color: var(--danger); font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.95); z-index: 2000;
+            align-items: center; justify-content: center; padding: 20px;
+        }
+
+        .modal {
+            background: var(--surface); border: 1px solid var(--primary);
+            max-width: 500px; width: 100%; padding: 40px; border-radius: 12px;
+            text-align: center;
+        }
+
+        .modal h2 { margin-bottom: 20px; font-weight: 700; color: var(--primary); }
+        .discord-box {
+            background: #1a1a20; padding: 20px; border-radius: 8px;
+            margin: 25px 0; border: 1px dashed var(--primary);
+        }
+
+        .btn-close { margin-top: 20px; background: none; border: none; color: var(--text-dim); cursor: pointer; text-decoration: underline; }
 
     </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-
 <nav>
-    <div class="logo">TEAM RZR</div>
-    <div class="discord-tag">DISCORD: valcren_23</div>
+    <div class="mono" style="font-weight: bold; font-size: 1.1rem;">RZR.SYSTEM<span style="color: var(--primary);">_</span></div>
+    <div class="mono" style="font-size: 0.8rem;">
+        <span class="status-dot"></span> ENCRYPTED_SERVER: ACTIVE
+    </div>
 </nav>
 
-<header>
-    <p>Roblox Developer Since 2010</p>
-    <h1>FGH567</h1>
-    <p style="color: var(--primary);">PRIVATE SCRIPT ARCHIVE</p>
-</header>
+<section class="hero">
+    <span class="whitelist-badge">Whitelist System V2 Active</span>
+    <h1>Archive Privée de FGH567</h1>
+    <p style="color: var(--text-dim);">Développeur depuis 2010. Mes outils sont réservés aux membres vérifiés. Tout usage non autorisé ou tentative de modification entraînera un bannissement définitif de l'infrastructure.</p>
+</section>
 
 <div class="container">
     <div class="grid">
+        <div class="card">
+            <img src="https://tr.rbxcdn.com/180DAY-52456ff62f1db414ffad93789387c18a/768/432/Image/Webp/noFilter" class="card-image">
+            <div class="card-content">
+                <span class="card-tag">PROTECTED_LUA</span>
+                <div class="card-title">+1 Speed Hover board Escape !</div>
+                <button class="btn-lock" onclick="toggleModal(true)">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2m-6-5c1.66 0 3 1.34 3 3v2H9V6c0-1.66 1.34-3 3-3z"/></svg>
+                    REQUEST ACCESS
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" class="card-image">
+            <div class="card-content">
+                <span class="card-tag">PROTECTED_LUA</span>
+                <div class="card-title">Highway Showdown</div>
+                <button class="btn-lock" onclick="toggleModal(true)">REQUEST ACCESS</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" class="card-image">
+            <div class="card-content">
+                <span class="card-tag">PROTECTED_LUA</span>
+                <div class="card-title">Truck RNG</div>
+                <button class="btn-lock" onclick="toggleModal(true)">REQUEST ACCESS</button>
+            </div>
+        </div>
         
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-52456ff62f1db414ffad93789387c18a/768/432/Image/Webp/noFilter" alt="New Script">
-            <h3>+1 Speed Hover board Escape ! [PRIVATE]</h3>
-            <button class="btn-request" onclick="openModal()">GET PRIVATE ACCESS</button>
         </div>
 
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" alt="Highway">
-            <h3>Highway Showdown</h3>
-            <button class="btn-request" onclick="openModal()">GET PRIVATE ACCESS</button>
-        </div>
-
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" alt="TruckRNG">
-            <h3>Truck RNG</h3>
-            <button class="btn-request" onclick="openModal()">GET PRIVATE ACCESS</button>
-        </div>
-
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-dca01ce2f08e9b0c2be10d8af2f43558/768/432/Image/Webp/noFilter" alt="Pushing">
-            <h3>Pushing Together</h3>
-            <button class="btn-request" onclick="openModal()">GET PRIVATE ACCESS</button>
-        </div>
-
-        <div class="card">
-            <img src="https://scriptblox.com/images/script/9606797934-1766202243138.png" alt="Train">
-            <h3>Train VS Cars Remastered</h3>
-            <button class="btn-request" onclick="openModal()">GET PRIVATE ACCESS</button>
-        </div>
-
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-0937b2b0c4ec68e44c9c6d003c3dde7b/768/432/Image/Webp/noFilter" alt="Slide">
-            <h3>Slide 999,999 Miles Obby</h3>
-            <button class="btn-request" onclick="openModal()">GET PRIVATE ACCESS</button>
-        </div>
-
-    </div>
-
-    <div class="legacy-box">
-        <h2>LEGACY & SINCERITY</h2>
-        <p>I have been developing on Roblox for 15 years. Every script here is the result of hours of work. To prevent cracking and theft, all scripts are now <b>PRIVATE</b>. Contact me on Discord to request access. I do this for the community, but respect my time.</p>
-        <p style="margin-top: 20px; color: var(--primary);">Happy New Year 2026. Stop cracking, start creating.</p>
+    <div class="protection-info">
+        <h2 class="mono">POLITIQUE DE SÉCURITÉ (WHITELIST)</h2>
+        <p style="margin-bottom: 15px;">Chaque script délivré est lié à votre identifiant unique. Si un script est retrouvé en ligne ou modifié :</p>
+        <ul style="list-style: none; color: var(--text-dim); font-size: 0.95rem;">
+            <li>• Votre accès sera immédiatement révoqué via le système distant.</li>
+            <li>• Votre profil sera blacklisté de tous mes futurs projets.</li>
+            <li>• Une plainte sera déposée auprès des hébergeurs de fichiers.</li>
+        </ul>
+        <p style="margin-top: 20px; font-weight: bold;">Respectez mon travail de 15 ans, je respecterais votre expérience de jeu.</p>
     </div>
 </div>
 
-<div class="modal" id="contactModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">CLOSE [X]</span>
-        <h2>ACCESS REQUIRED</h2>
-        <p>This script is protected. To receive the loadstring and the key, add me on Discord:</p>
-        <span class="tag">valcren_23</span>
-        <p style="font-size: 0.8rem; color: #555;">(Specify which script you are interested in when you DM me)</p>
+<div class="modal-overlay" id="accessModal">
+    <div class="modal">
+        <h2 class="mono">ACCÈS RESTREINT</h2>
+        <p style="color: var(--text-dim);">Pour intégrer la <b>Whitelist</b>, vous devez passer un court entretien de vérification.</p>
+        
+        <div class="discord-box">
+            <p style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 5px;">Contact Discord</p>
+            <p class="mono" style="font-size: 1.4rem; font-weight: bold;">valcren_23</p>
+        </div>
+
+        <p style="font-size: 0.9rem;">Envoyez un message avec le nom du script souhaité et votre pseudo Roblox.</p>
+        
+        <button class="btn-close" onclick="toggleModal(false)">Retour au terminal</button>
     </div>
 </div>
 
 <script>
-    function openModal() {
-        document.getElementById('contactModal').style.display = 'flex';
+    function toggleModal(show) {
+        const modal = document.getElementById('accessModal');
+        modal.style.display = show ? 'flex' : 'none';
     }
-    function closeModal() {
-        document.getElementById('contactModal').style.display = 'none';
-    }
-    window.onclick = function(event) {
-        if (event.target.className == 'modal') { closeModal(); }
-    }
+
+    // Fermeture avec la touche Echap
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") toggleModal(false);
+    });
 </script>
 
 </body>
