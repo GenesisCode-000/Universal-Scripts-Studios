@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub de Scripts | FGH567 & che3t_2345</title>
+    <title>Universal-Scripts | Official Hub</title>
+    
+    <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1469791826150953011/1470518395228131445/image.png?ex=698b967a&is=698a44fa&hm=5f54fbe68b6b000fcf1ce53222139bc3cd34aff6567842d0e1b3b90055767c53&">
+
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f1012;
-            --card-bg: #16171a;
-            --accent: #007bff;
+            --bg: #0b0c0e;
+            --card-bg: #141518;
+            --accent: #0084ff;
             --text: #ffffff;
-            --text-dim: #a0a0a0;
-            --border: #2a2c31;
+            --text-dim: #9ca3af;
+            --border: #24262b;
+            --new: #ff3e3e;
+            --date-bg: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,183 +28,267 @@
             line-height: 1.6;
         }
 
+        /* --- BADGE NEW --- */
+        .badge-new {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--new); color: white;
+            padding: 5px 12px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 800;
+            text-transform: uppercase; z-index: 10;
+            box-shadow: 0 0 15px rgba(255, 62, 62, 0.5);
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--date-bg);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 132, 255, 0.2);
+        }
+
         /* --- NAVIGATION --- */
         nav {
-            background: #000;
-            padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #000; padding: 15px 10%;
+            display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; }
+        .logo { font-weight: 700; font-size: 1.4rem; }
         .logo span { color: var(--accent); }
 
         /* --- HEADER --- */
         header {
-            padding: 80px 10%;
-            text-align: center;
-            background: radial-gradient(circle at center, #1a1c20 0%, #0f1012 100%);
+            padding: 70px 10% 30px; text-align: center;
+            background: radial-gradient(circle at center, #16181d 0%, #0b0c0e 100%);
         }
-        header h1 { font-size: 3rem; margin-bottom: 15px; }
-        header p { color: var(--text-dim); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+        header h1 { font-size: 3.2rem; margin-bottom: 10px; font-weight: 700; }
+        header p { color: var(--text-dim); }
 
-        /* --- TEAM BOX --- */
-        .team-section {
-            display: flex; justify-content: center; gap: 40px; margin-top: 30px;
+        /* --- TABS --- */
+        .tabs-container {
+            max-width: 1200px; margin: 0 auto; padding: 20px;
+            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;
         }
-        .member { background: var(--card-bg); padding: 10px 25px; border-radius: 8px; border: 1px solid var(--border); }
-        .member b { color: var(--accent); }
+        .tab-btn {
+            background: var(--card-bg); border: 1px solid var(--border); color: var(--text-dim);
+            padding: 12px 25px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.3s;
+        }
+        .tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- GRID --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: slideUp 0.5s ease forwards; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- GRID & CARDS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px 20px 100px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
 
-        /* --- CARDS --- */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: 0.3s;
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
+            overflow: hidden; transition: 0.4s; position: relative;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .card-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; } 
         
-        .card-content { padding: 20px; }
-        .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; display: block; height: 45px; }
+        .card-content { padding: 25px; }
+        .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; display: block; min-height: 40px; }
 
         .btn-access {
-            width: 100%; padding: 12px;
-            background: var(--accent);
-            color: white; border: none;
-            border-radius: 6px; font-weight: 600;
-            cursor: pointer; transition: 0.2s;
+            width: 100%; padding: 14px; background: var(--accent); color: white; border: none;
+            border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase;
         }
-        .btn-access:hover { opacity: 0.8; }
 
-        /* --- SINCERITY --- */
-        .info-box {
-            background: var(--card-bg); padding: 40px; border-radius: 12px;
-            border: 1px solid var(--border); margin-top: 60px;
-        }
-        .info-box h2 { margin-bottom: 20px; color: var(--accent); }
-        .info-box p { margin-bottom: 15px; color: var(--text-dim); }
+        /* --- INFO BOXES --- */
+        .info-tab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+        .info-box-v2 { background: var(--card-bg); padding: 35px; border-radius: 20px; border: 1px solid var(--border); border-left: 4px solid var(--accent); }
+        .info-box-v2 h3 { color: var(--accent); margin-bottom: 20px; font-size: 1.5rem; }
+        .info-box-v2 p { color: var(--text-dim); margin-bottom: 15px; font-size: 0.95rem; }
+        .info-box-v2 ul { list-style: none; margin-top: 10px; }
+        .info-box-v2 li { margin-bottom: 12px; color: var(--text-dim); font-size: 0.9rem; padding-left: 15px; position: relative; }
+        .info-box-v2 li::before { content: "🔹"; position: absolute; left: -10px; }
 
         /* --- MODAL --- */
         .modal {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-            z-index: 1000; align-items: center; justify-content: center;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(15px);
         }
+        .modal.show { display: flex; }
         .modal-content {
-            background: var(--card-bg); padding: 40px; border-radius: 15px;
-            border: 1px solid var(--accent); text-align: center; max-width: 450px; width: 90%;
+            background: #1a1c21; padding: 45px; border-radius: 30px; border: 1px solid var(--accent);
+            text-align: center; max-width: 450px; width: 92%;
         }
-        .discord-id { 
-            display: block; margin: 20px 0; padding: 15px; 
-            background: #000; border-radius: 8px; 
-            color: var(--accent); font-weight: 700; font-size: 1.3rem;
-        }
-        .close-btn { background: none; border: none; color: #ff4d4d; cursor: pointer; font-weight: bold; margin-top: 20px; }
-
+        .contact-item { display: block; margin: 15px 0; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 18px; border: 1px solid rgba(255,255,255,0.05); }
+        .contact-label { font-size: 0.7rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; }
+        .contact-value { font-weight: 700; font-size: 1.4rem; color: #fff; }
+        .close-btn { background: none; border: none; color: #ff4d4d; cursor: pointer; font-weight: bold; margin-top: 25px; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">TEAM <span>RZR</span> HUB</div>
-    <div style="font-size: 0.9rem; color: var(--text-dim);">FGH567 Official Website</div>
+    <div class="logo">UNIVERSAL<span>-SCRIPTS</span></div>
+    <div style="font-size: 0.85rem; color: var(--text-dim); font-weight: 600;">v2.5 Stable</div>
 </nav>
 
 <header>
-    <h1>Scripts Privés & Sécurisés</h1>
-    <p>Bienvenue sur notre catalogue. Tous les scripts présents ici sont développés pour être performants et sécurisés.</p>
-    
-    <div class="team-section">
-        <div class="member">Fondateur & Gérant : <b>FGH567</b></div>
-        <div class="member">Scripteur : <b>che3t_2345</b></div>
-    </div>
+    <h1>Universal Scripts Studios</h1>
+    <p>Solutions logicielles avancées et automatisation de pointe.</p>
 </header>
 
+<div class="tabs-container">
+    <button class="tab-btn active" onclick="openTab(event, 'scripts')">Catalogue Scripts</button>
+    <button class="tab-btn" onclick="openTab(event, 'team')">Organigramme Studios</button>
+    <button class="tab-btn" onclick="openTab(event, 'whitelist')">Whitelist & Sécurité</button>
+</div>
+
 <div class="container">
-    <div class="grid">
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-52456ff62f1db414ffad93789387c18a/768/432/Image/Webp/noFilter" class="card-img">
-            <div class="card-content">
-                <span class="card-title">+1 Speed Hover board Escape !</span>
-                <button class="btn-access" onclick="openModal()">DEMANDER L'ACCÈS</button>
+    <div id="scripts" class="tab-content active">
+        <div class="grid">
+            
+            <div class="card">
+                <div class="badge-new">New</div>
+                <img src="https://cdn.discordapp.com/attachments/1469791826150953011/1470894049840992297/noFilter.png?ex=698cf455&is=698ba2d5&hm=b96c2ea5fd0c036ace2abe2a7f66487380f40e88bc0b5612a7761b27b9fb9e87&" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">New Game Adventure</span>
+                    <span class="date-badge">Sortie : 10/02/26</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" class="card-img">
-            <div class="card-content">
-                <span class="card-title">Highway Showdown [🌵 NEW MAP]</span>
-                <button class="btn-access" onclick="openModal()">DEMANDER L'ACCÈS</button>
+            <div class="card">
+                <div class="badge-new">New</div>
+                <img src="https://tr.rbxcdn.com/180DAY-52456ff62f1db414ffad93789387c18a/768/432/Image/Webp/noFilter" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">+1 Speed Hover board Escape !</span>
+                    <span class="date-badge">Sortie : 09/02/26</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" class="card-img">
-            <div class="card-content">
-                <span class="card-title">Truck RNG</span>
-                <button class="btn-access" onclick="openModal()">DEMANDER L'ACCÈS</button>
+            <div class="card">
+                <div class="badge-new">New</div>
+                <img src="https://cdn.discordapp.com/attachments/1469791826150953011/1470527184719319201/noFilter.png?ex=698b9ea9&is=698a4d29&hm=a5c1c82262b4de4c9a82d048eb155552939c5998f6924245f6c8f309feaa774e&" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">Escape Tsunami for Cars!</span>
+                    <span class="date-badge">La semaine dernière</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-dca01ce2f08e9b0c2be10d8af2f43558/768/432/Image/Webp/noFilter" class="card-img">
-            <div class="card-content">
-                <span class="card-title">Pushing Together</span>
-                <button class="btn-access" onclick="openModal()">DEMANDER L'ACCÈS</button>
+            <div class="card">
+                <img src="https://tr.rbxcdn.com/180DAY-b1550162673974d284b243e8dc5c88b4/768/432/Image/Webp/noFilter" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">Highway Showdown [🌵 NEW MAP]</span>
+                    <span class="date-badge">Il y a 2 semaines</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="https://scriptblox.com/images/script/9606797934-1766202243138.png" class="card-img">
-            <div class="card-content">
-                <span class="card-title">Train VS Cars Remastered</span>
-                <button class="btn-access" onclick="openModal()">DEMANDER L'ACCÈS</button>
+            <div class="card">
+                <img src="https://tr.rbxcdn.com/180DAY-49d0b32f9c72aecd85d4d89c98a598f8/768/432/Image/Webp/noFilter" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">Truck RNG</span>
+                    <span class="date-badge">Le mois dernier</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="https://tr.rbxcdn.com/180DAY-0937b2b0c4ec68e44c9c6d003c3dde7b/768/432/Image/Webp/noFilter" class="card-img">
-            <div class="card-content">
-                <span class="card-title">Slide 999,999 Miles Obby</span>
-                <button class="btn-access" onclick="openModal()">DEMANDER L'ACCÈS</button>
+            <div class="card">
+                <img src="https://tr.rbxcdn.com/180DAY-dca01ce2f08e9b0c2be10d8af2f43558/768/432/Image/Webp/noFilter" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">Pushing Together</span>
+                    <span class="date-badge">Il y a 2 mois</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://scriptblox.com/images/script/9606797934-1766202243138.png" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">Train VS Cars Remastered</span>
+                    <span class="date-badge">Il y a 2 mois</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://tr.rbxcdn.com/180DAY-0937b2b0c4ec68e44c9c6d003c3dde7b/768/432/Image/Webp/noFilter" class="card-img">
+                <div class="card-content">
+                    <span class="card-title">Slide 999,999 Miles Obby</span>
+                    <span class="date-badge">Il y a 3 mois</span>
+                    <button class="btn-access" onclick="openModal()">Demander l'accès</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="info-box">
-        <h2>À propos de nous</h2>
-        <p>Je suis <b>FGH567</b>, présent sur Roblox depuis 2010. Ce site me permet de gérer et de distribuer les outils créés par mon ami et collaborateur <b>che3t_2345</b>.</p>
-        <p>Pour éviter les vols de code et les modifications non autorisées, nous avons décidé de passer tous nos scripts en accès privé. Cela nous permet de savoir qui utilise nos outils et de garantir qu'ils fonctionnent toujours correctement.</p>
-        <p>Si vous souhaitez utiliser l'un de nos scripts, la procédure est simple : contactez-moi sur Discord, nous discuterons de votre demande, et si vous êtes validé, vous recevrez votre accès personnel.</p>
+    <div id="team" class="tab-content">
+        <div class="info-tab-grid">
+            <div class="info-box-v2">
+                <h3>Hiérarchie Officielle</h3>
+                <ul>
+                    <li><b>FGH567</b> : Fondateur & Owner</li>
+                    <li><b>che3t_2345</b> : Lead Developer Scripter</li>
+                    <li><b>Team Scripts Studios</b> : Support Technique & Maintenance</li>
+                </ul>
+            </div>
+            <div class="info-box-v2">
+                <h3>Engagement Studios</h3>
+                <p>Universal-Scripts repose sur une infrastructure gérée par la <b>Team Scripts Studios</b>. Nous garantissons une stabilité logicielle et des mises à jour régulières pour contourner les dernières restrictions.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="whitelist" class="tab-content">
+        <div class="info-tab-grid">
+            <div class="info-box-v2">
+                <h3>Système de Chiffrement</h3>
+                <p>Chaque licence distribuée bénéficie d'un chiffrement asymétrique liée à l'empreinte numérique unique de votre machine.</p>
+                <ul>
+                    <li>Protection contre le Reverse Engineering.</li>
+                    <li>Cryptage des données AES-256.</li>
+                </ul>
+            </div>
+            <div class="info-box-v2">
+                <h3>Authentification & HWID</h3>
+                <p>Notre infrastructure vérifie en temps réel l'intégrité de l'utilisateur. Toute tentative de fuite entraîne une révocation immédiate.</p>
+                <ul>
+                    <li>Tolérance zéro contre le Leak.</li>
+                    <li>Liaison Hardware ID (HWID).</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="modal" id="contactModal">
     <div class="modal-content">
-        <h3>Procédure de Whitelist</h3>
-        <p style="margin-top:15px; color: var(--text-dim);">Pour obtenir le script et votre clé d'accès, merci de m'ajouter sur Discord :</p>
-        <span class="discord-id">valcren_23</span>
-        <p style="font-size: 0.85rem;">Indiquez votre pseudo Roblox et le script souhaité dans votre message.</p>
-        <button class="close-btn" onclick="closeModal()">FERMER</button>
+        <h3>Vérification de Profil</h3>
+        <p style="color: var(--text-dim); margin-bottom: 25px;">Contactez nos agents pour validation :</p>
+        <div class="contact-item"><span class="contact-label">Discord Secours</span><span class="contact-value">doxhunter</span></div>
+        <div class="contact-item"><span class="contact-label">Instagram Officiel</span><span class="contact-value">@developer_345</span></div>
+        <button class="close-btn" onclick="closeModal()">RETOUR AU HUB</button>
     </div>
 </div>
 
 <script>
-    function openModal() {
-        document.getElementById('contactModal').style.display = 'flex';
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
     }
-    function closeModal() {
-        document.getElementById('contactModal').style.display = 'none';
-    }
-    window.onclick = function(event) {
-        if (event.target.className == 'modal') { closeModal(); }
-    }
+
+    function openModal() { document.getElementById('contactModal').classList.add('show'); }
+    function closeModal() { document.getElementById('contactModal').classList.remove('show'); }
 </script>
 
 </body>
